@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Goto&#39;s blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.i4ww.com/"/>
+  <updated>2018-02-11T02:43:21.000Z</updated>
+  <id>http://www.i4ww.com/</id>
+  
+  <author>
+    <name>goto</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>欢迎来到我的博客</title>
+    <link href="http://www.i4ww.com/2018/02/10/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://www.i4ww.com/2018/02/10/欢迎来到我的博客/</id>
+    <published>2018-02-10T09:03:18.000Z</published>
+    <updated>2018-02-11T02:43:21.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.i4ww.com/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="博客" scheme="http://www.i4ww.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+</feed>
