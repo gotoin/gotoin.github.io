@@ -83,7 +83,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Goto&#39;s blog">
-<meta property="og:url" content="http://www.i4ww.com/index.html">
+<meta property="og:url" content="http://www.i4ww.com/categories/数据库/index.html">
 <meta property="og:site_name" content="Goto&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -117,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://www.i4ww.com/">
+  <link rel="canonical" href="http://www.i4ww.com/categories/数据库/">
 
 
 
 
 
-  <title>Goto's blog</title>
+  <title>分类: 数据库 | Goto's blog</title>
   
 
 
@@ -142,8 +142,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <a href="https://www.github.com/gotoin" class="github-corner" aria-label="View source on Github" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250
                                                                                                     250" style="fill:#151513;
@@ -355,563 +354,54 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block category">
+
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>数据库<small>分类</small>
+        </h1>
+      </div>
+
       
-
-  
-
-  
-  
-  
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.i4ww.com/2018/03/07/记一次在Docker容器中crontab不执行的问题/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="goto">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Goto's blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/03/05/多版本并发控制的机制与原理/" itemprop="url">
+              
+                <span itemprop="name">多版本并发控制的机制与原理</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/07/记一次在Docker容器中crontab不执行的问题/" itemprop="url">记一次在Docker容器中crontab不执行的问题</a></h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T11:38:20+08:00">
-                2018-03-07
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2018-03-05T19:21:05+08:00" content="2018-03-05">
+          03-05
+        </time>
+      </div>
 
-            
+    </header>
+  </article>
 
-            
-          </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  113
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"><a href="#在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决" class="headerlink" title="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"></a>在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决</h3><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器</span><br><span class="line">$ vim /etc/pam.d/crond</span><br><span class="line">account    required   pam_access.so</span><br><span class="line">account    include    password-auth</span><br><span class="line">#session    required   pam_loginuid.so  #注释此行</span><br><span class="line">session    include    password-auth</span><br><span class="line">auth       include    password-auth</span><br></pre></td></tr></table></figure>
-<h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><ul>
-<li>不要在单一容器中运行超过一个进程</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-    
-    <div>
       
     </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-      
 
   
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.i4ww.com/2018/03/06/三种常见单例模式实现/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="goto">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Goto's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/06/三种常见单例模式实现/" itemprop="url">三种常见单例模式实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T22:17:31+08:00">
-                2018-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  174
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">    private static $instance = null;</span><br><span class="line"></span><br><span class="line">    private function __construct() &#123; &#125;</span><br><span class="line">    private function __clone() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static function getInstance() : Singleton</span><br><span class="line">    &#123;</span><br><span class="line">        if (self::$instance === null) &#123;</span><br><span class="line">            self::$instance = new self();</span><br><span class="line">        &#125;</span><br><span class="line">        return self::$instance;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * php中是不允许这样的，这里只做示例使用</span><br><span class="line">  */</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">    private static $instance = new Singleton();</span><br><span class="line"></span><br><span class="line">    private function __construct() &#123; &#125;</span><br><span class="line">    private function __clone() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static function getInstance() : Singleton</span><br><span class="line">    &#123;</span><br><span class="line">        return self::$instance;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="登记式"><a href="#登记式" class="headerlink" title="登记式"></a>登记式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * php中是不允许的这样的，这里只做示例使用</span><br><span class="line">  */</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">    private static $instance = null;</span><br><span class="line"></span><br><span class="line">    private function __construct() &#123; &#125;</span><br><span class="line">    private function __clone() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder</span><br><span class="line">    &#123;</span><br><span class="line">        private static final Singleton SINGLETON = new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static function getInstance() : Singleton</span><br><span class="line">    &#123;</span><br><span class="line">        return Holder.SINGLETON;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.i4ww.com/2018/03/05/多版本并发控制的机制与原理/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="goto">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Goto's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/05/多版本并发控制的机制与原理/" itemprop="url">多版本并发控制的机制与原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T19:21:05+08:00">
-                2018-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  373
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="什么是-MVCC"><a href="#什么是-MVCC" class="headerlink" title="什么是 MVCC"></a>什么是 MVCC</h1><ul>
-<li>MVCC （Mutli Version Concurreny Control）既 多版本并发控制，也叫 一致性非锁定读，实现原理其它就是使用快照实现写时复制 (Copy On Write)</li>
-</ul>
-<h1 id="使用MVCC的好处"><a href="#使用MVCC的好处" class="headerlink" title="使用MVCC的好处"></a>使用MVCC的好处</h1><ul>
-<li><p>消除锁的开销：传统的数据库保证数据一致性是对数据进行加锁操作，但加锁必然会产生开销，使用MVCC能够避免对数据加锁。</p>
-</li>
-<li><p>提高并发：在保证了数据的ACID的同时，实现了 读读 、读写、写读 的并发。</p>
-</li>
-</ul>
-<h1 id="InnoDB如何实现MVCC"><a href="#InnoDB如何实现MVCC" class="headerlink" title="InnoDB如何实现MVCC"></a>InnoDB如何实现MVCC</h1><ul>
-<li>MySql InnoDB MVCC主要是为事务的 可重复读 隔离级别服务的，在此隔离级别下，进程间数据相互隔离。</li>
-<li>为了实现MVCC，InnoDB引擎会对每一行都加上两个隐藏的字段，一个字段用来存储行被更新的时间戳，另一字段存储行被删除的时间戳 （这里的时间戳都是逻辑时间戳）。事务在开始时，InnoDB引擎会给该事务一个递增的版本号（也就是上面说的逻辑时间戳），在该事务中，InnoDB会把每一条语句的版本号和这条语句遇到的行版本进行比对，然后结合不同的隔离级别，来决定是否返回该行。</li>
-</ul>
-<h1 id="MVCC的缺点："><a href="#MVCC的缺点：" class="headerlink" title="MVCC的缺点："></a>MVCC的缺点：</h1><ul>
-<li>为了实现多版本，InnoDB需要维护额外的隐藏字段，以及清理不需要的行版本，会带来额外开销。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><pre><code>MySql技术内幕
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
