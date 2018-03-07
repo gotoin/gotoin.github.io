@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="PHP zend zval,">
 
 
 
@@ -81,13 +81,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Goto&#39;s blog">
-<meta property="og:url" content="http://www.i4ww.com/categories/数据库/index.html">
+<meta name="description" content="PHP是一种弱类型语言，但是弱类型并不代表PHP变量就没有类型区分 PHP的类型有8种  标量类型：boolen(布尔)，integer(整型)，float(浮点)，string(字符) 复合类型：array(数组)，object(对象) 特殊类型：resource(资源) null">
+<meta name="keywords" content="PHP zend zval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解PHP内核之ZVAL">
+<meta property="og:url" content="http://www.i4ww.com/2018/03/06/深入理解PHP内核之ZVAL/index.html">
 <meta property="og:site_name" content="Goto&#39;s blog">
+<meta property="og:description" content="PHP是一种弱类型语言，但是弱类型并不代表PHP变量就没有类型区分 PHP的类型有8种  标量类型：boolen(布尔)，integer(整型)，float(浮点)，string(字符) 复合类型：array(数组)，object(对象) 特殊类型：resource(资源) null">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-07T16:17:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Goto&#39;s blog">
+<meta name="twitter:title" content="深入理解PHP内核之ZVAL">
+<meta name="twitter:description" content="PHP是一种弱类型语言，但是弱类型并不代表PHP变量就没有类型区分 PHP的类型有8种  标量类型：boolen(布尔)，integer(整型)，float(浮点)，string(字符) 复合类型：array(数组)，object(对象) 特殊类型：resource(资源) null">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://www.i4ww.com/categories/数据库/">
+  <link rel="canonical" href="http://www.i4ww.com/2018/03/06/深入理解PHP内核之ZVAL/">
 
 
 
 
 
-  <title>分类: 数据库 | Goto's blog</title>
+  <title>深入理解PHP内核之ZVAL | Goto's blog</title>
   
 
 
@@ -142,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://www.github.com/gotoin" class="github-corner" aria-label="View source on Github" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250
                                                                                                     250" style="fill:#151513;
@@ -355,53 +360,253 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数据库<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.i4ww.com/2018/03/06/深入理解PHP内核之ZVAL/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="goto">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goto's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/05/多版本并发控制的机制与原理/" itemprop="url">
-              
-                <span itemprop="name">多版本并发控制的机制与原理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">深入理解PHP内核之ZVAL</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-03-05T19:21:05+08:00" content="2018-03-05">
-          03-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T23:55:56+08:00">
+                2018-03-06
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  738
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PHP是一种弱类型语言，但是弱类型并不代表PHP变量就没有类型区分</p>
+<p>PHP的类型有8种</p>
+<ul>
+<li>标量类型：boolen(布尔)，integer(整型)，float(浮点)，string(字符)</li>
+<li>复合类型：array(数组)，object(对象)</li>
+<li>特殊类型：resource(资源) null</li>
+</ul>
+<a id="more"></a>
+<p>PHP可以不声明变量类型，可以在运行时直接赋值。并且在运行期间可以由一种类型转换成另一种类型。</p>
+<p>如下例，没有声明的情况下，$variable 可以赋任意类型的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$variable = 0;</span><br><span class="line">$variable = &apos;hello world.&apos;;</span><br><span class="line">$variable = true;</span><br></pre></td></tr></table></figure></p>
+<p>在PHP引擎内，变量都是用一个结构体来表示。</p>
+<p>这个结构体具体代码在: <a href="https://github.com/php/php-src/blob/PHP-5.6.34/Zend/zend.h" rel="external nofollow noopener noreferrer" target="_blank">点击传送</a></p>
+<p>ZVAL 基本结构为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct _zval_struct &#123;</span><br><span class="line">	/* Variable information */</span><br><span class="line">	zvalue_value value; /* 存储变量的值 */</span><br><span class="line">	zend_uint refcount__gc; /* 引用计数 */</span><br><span class="line">	zend_uchar type; /* 变量的类型 */</span><br><span class="line">	zend_uchar is_ref__gc; /* 是否为引用 */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="zval-value-value"><a href="#zval-value-value" class="headerlink" title="zval_value value"></a>zval_value value</h3><pre><code>这里就是变量的实际值，类型是一个 zvalue_value 联合体。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedef union _zvalue_value &#123;</span><br><span class="line">	long lval;					/* long value */</span><br><span class="line">	double dval;				/* double value */</span><br><span class="line">	struct &#123;</span><br><span class="line">		char *val;</span><br><span class="line">		int len;</span><br><span class="line">	&#125; str;</span><br><span class="line">	HashTable *ht;				/* hash table value */</span><br><span class="line">	zend_object_value obj;</span><br><span class="line">	zend_ast *ast;</span><br><span class="line">&#125; zvalue_value;</span><br></pre></td></tr></table></figure>
+<h3 id="zend-uint-refcount-gc"><a href="#zend-uint-refcount-gc" class="headerlink" title="zend_uint refcount__gc"></a>zend_uint refcount__gc</h3><pre><code>实际是一个计数器，用来保存有多少变量指向该zval。在变量生成时，会置为1，也就是说 refcount__gc = 1
+对变量进行操作会改变它的值。如 $a = $b 会使 refcount 加 1，而 unset() 操作会减 1
+</code></pre><h3 id="zend-uchar-type"><a href="#zend-uchar-type" class="headerlink" title="zend_uchar type"></a>zend_uchar type</h3><p> 这个字段表示变量的类型，前面说过 PHP 有8种类型，在 PHP zend 引擎中，对应下面的宏</p>
+<p> 该type字段会决定上面 zval_value 联合体储存的方式</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#define IS_NULL		0</span><br><span class="line">#define IS_LONG		1</span><br><span class="line">#define IS_DOUBLE	2</span><br><span class="line">#define IS_BOOL		3</span><br><span class="line">#define IS_ARRAY	4</span><br><span class="line">#define IS_OBJECT	5</span><br><span class="line">#define IS_STRING	6</span><br><span class="line">#define IS_RESOURCE	7</span><br><span class="line">#define IS_CONSTANT	8</span><br><span class="line">#define IS_CONSTANT_AST	9</span><br><span class="line">#define IS_CALLABLE	10</span><br></pre></td></tr></table></figure>
+<h3 id="zend-uchar-is-ref-gc"><a href="#zend-uchar-is-ref-gc" class="headerlink" title="zend_uchar is_ref__gc"></a>zend_uchar is_ref__gc</h3><pre><code>标志是否为引用,当使用 &amp; 对一个变量操作时,如 $a = &amp;$b, is_ref__gc 会被设置为1。
+</code></pre><h1 id="zval如何在PHP中运行"><a href="#zval如何在PHP中运行" class="headerlink" title="zval如何在PHP中运行"></a>zval如何在PHP中运行</h1><h3 id="我们在创建一个PHP变量时实际上在PHP中是创建了一个zval"><a href="#我们在创建一个PHP变量时实际上在PHP中是创建了一个zval" class="headerlink" title="我们在创建一个PHP变量时实际上在PHP中是创建了一个zval"></a>我们在创建一个PHP变量时实际上在PHP中是创建了一个zval</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 下面代码需要安装 xdebug 扩展</span><br><span class="line">$a = &apos;hello world&apos;;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=1, is_ref=0)=&apos;hello world&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="对应上面的zval结构体，也就是"><a href="#对应上面的zval结构体，也就是" class="headerlink" title="对应上面的zval结构体，也就是"></a>对应上面的zval结构体，也就是</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">value = &apos;hello world&apos;;</span><br><span class="line">refcount__gc = 1;</span><br><span class="line">type =  IS_STRING;</span><br><span class="line">is_ref__gc = 0;</span><br></pre></td></tr></table></figure>
+<h2 id="我们把-a赋值给另一个变量时，会增加zval的refcount-gc"><a href="#我们把-a赋值给另一个变量时，会增加zval的refcount-gc" class="headerlink" title="我们把$a赋值给另一个变量时，会增加zval的refcount__gc"></a>我们把$a赋值给另一个变量时，会增加zval的refcount__gc</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = &apos;hello world&apos;;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br><span class="line">$b = $a;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br><span class="line">xdebug_debug_zval(&apos;b&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果-1"><a href="#输出结果-1" class="headerlink" title="输出结果"></a>输出结果</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=1, is_ref=0)=&apos;hello world&apos;</span><br><span class="line">a: (refcount=2, is_ref=0)=&apos;hello world&apos;</span><br><span class="line">b: (refcount=2, is_ref=0)=&apos;hello world&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="可以看到-a和-b的结构是一样的-它们都指向同一个zval"><a href="#可以看到-a和-b的结构是一样的-它们都指向同一个zval" class="headerlink" title="可以看到$a和$b的结构是一样的,它们都指向同一个zval"></a>可以看到$a和$b的结构是一样的,它们都指向同一个zval</h3><h2 id="使用unset时"><a href="#使用unset时" class="headerlink" title="使用unset时"></a>使用unset时</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = &apos;hello world&apos;;</span><br><span class="line">$b = $a;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br><span class="line">unset($b);</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="输入结果"><a href="#输入结果" class="headerlink" title="输入结果"></a>输入结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=2, is_ref=0)=&apos;hello world&apos;</span><br><span class="line">a: (refcount=1, is_ref=0)=&apos;hello world&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="使用-amp-时"><a href="#使用-amp-时" class="headerlink" title="使用 &amp; 时"></a>使用 &amp; 时</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = &apos;hello world&apos;;</span><br><span class="line">$b = &amp;$a;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="输入结果-1"><a href="#输入结果-1" class="headerlink" title="输入结果"></a>输入结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=2, is_ref=1)=&apos;hello world&apos;</span><br></pre></td></tr></table></figure>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>  在 PHP7 中，zval结构体发生了重大变化，有兴趣的可以参考 <a href="https://github.com/laruence/php7-internal/blob/master/zval.md" rel="external nofollow noopener noreferrer" target="_blank">鸟哥-深入理解PHP7之zval</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+		-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+		</div>
+    
+</div>
 
       
     </div>
 
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP-zend-zval/" rel="tag"><i class="fa fa-tag"></i> PHP zend zval</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/06/三种常见单例模式实现/" rel="next" title="三种常见单例模式实现">
+                <i class="fa fa-chevron-left"></i> 三种常见单例模式实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/07/PHP新的垃圾回收机制/" rel="prev" title="PHP新的垃圾回收机制">
+                PHP新的垃圾回收机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -409,6 +614,10 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 
 
           
+
+  
+
+
 
         </div>
         
@@ -429,8 +638,17 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -499,6 +717,22 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#zval-value-value"><span class="nav-number">1.</span> <span class="nav-text">zval_value value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zend-uint-refcount-gc"><span class="nav-number">2.</span> <span class="nav-text">zend_uint refcount__gc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zend-uchar-type"><span class="nav-number">3.</span> <span class="nav-text">zend_uchar type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zend-uchar-is-ref-gc"><span class="nav-number">4.</span> <span class="nav-text">zend_uchar is_ref__gc</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#zval如何在PHP中运行"><span class="nav-number"></span> <span class="nav-text">zval如何在PHP中运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我们在创建一个PHP变量时实际上在PHP中是创建了一个zval"><span class="nav-number">1.</span> <span class="nav-text">我们在创建一个PHP变量时实际上在PHP中是创建了一个zval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出结果"><span class="nav-number">2.</span> <span class="nav-text">输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应上面的zval结构体，也就是"><span class="nav-number">3.</span> <span class="nav-text">对应上面的zval结构体，也就是</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们把-a赋值给另一个变量时，会增加zval的refcount-gc"><span class="nav-number"></span> <span class="nav-text">我们把$a赋值给另一个变量时，会增加zval的refcount__gc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输出结果-1"><span class="nav-number">1.</span> <span class="nav-text">输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以看到-a和-b的结构是一样的-它们都指向同一个zval"><span class="nav-number">2.</span> <span class="nav-text">可以看到$a和$b的结构是一样的,它们都指向同一个zval</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用unset时"><span class="nav-number"></span> <span class="nav-text">使用unset时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入结果"><span class="nav-number">1.</span> <span class="nav-text">输入结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-amp-时"><span class="nav-number"></span> <span class="nav-text">使用 &amp; 时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入结果-1"><span class="nav-number">1.</span> <span class="nav-text">输入结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number"></span> <span class="nav-text">后记</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -666,6 +900,10 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

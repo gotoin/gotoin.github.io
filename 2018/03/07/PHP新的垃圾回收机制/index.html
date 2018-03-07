@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="PHP zend gc,">
 
 
 
@@ -81,13 +81,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Goto&#39;s blog">
-<meta property="og:url" content="http://www.i4ww.com/categories/数据库/index.html">
+<meta name="description" content="介绍在阅读本篇博文之前，建议先了解一下: PHP内核之ZVALPHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).在PHP官方你可以看到关于GC的介绍: 传送 PHP5.2中的垃圾回收算法 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的Reference counting(引用计数)">
+<meta name="keywords" content="PHP zend gc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP新的垃圾回收机制">
+<meta property="og:url" content="http://www.i4ww.com/2018/03/07/PHP新的垃圾回收机制/index.html">
 <meta property="og:site_name" content="Goto&#39;s blog">
+<meta property="og:description" content="介绍在阅读本篇博文之前，建议先了解一下: PHP内核之ZVALPHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).在PHP官方你可以看到关于GC的介绍: 传送 PHP5.2中的垃圾回收算法 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的Reference counting(引用计数)">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-07T16:17:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Goto&#39;s blog">
+<meta name="twitter:title" content="PHP新的垃圾回收机制">
+<meta name="twitter:description" content="介绍在阅读本篇博文之前，建议先了解一下: PHP内核之ZVALPHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).在PHP官方你可以看到关于GC的介绍: 传送 PHP5.2中的垃圾回收算法 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的Reference counting(引用计数)">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://www.i4ww.com/categories/数据库/">
+  <link rel="canonical" href="http://www.i4ww.com/2018/03/07/PHP新的垃圾回收机制/">
 
 
 
 
 
-  <title>分类: 数据库 | Goto's blog</title>
+  <title>PHP新的垃圾回收机制 | Goto's blog</title>
   
 
 
@@ -142,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://www.github.com/gotoin" class="github-corner" aria-label="View source on Github" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250
                                                                                                     250" style="fill:#151513;
@@ -355,53 +360,258 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数据库<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.i4ww.com/2018/03/07/PHP新的垃圾回收机制/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="goto">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goto's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/05/多版本并发控制的机制与原理/" itemprop="url">
-              
-                <span itemprop="name">多版本并发控制的机制与原理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">PHP新的垃圾回收机制</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-03-05T19:21:05+08:00" content="2018-03-05">
-          03-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T22:28:02+08:00">
+                2018-03-07
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,480
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>在阅读本篇博文之前，建议先了解一下: <a href="/2018/03/06/深入理解PHP内核之ZVAL/">PHP内核之ZVAL</a><br>PHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).<br>在PHP官方你可以看到关于GC的介绍: <a href="http://php.net/manual/zh/features.gc.php" rel="external nofollow noopener noreferrer" target="_blank">传送</a></p>
+<h1 id="PHP5-2中的垃圾回收算法"><a href="#PHP5-2中的垃圾回收算法" class="headerlink" title="PHP5.2中的垃圾回收算法"></a>PHP5.2中的垃圾回收算法</h1><p> 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的<a href="https://en.wikipedia.org/wiki/Reference_counting" rel="external nofollow noopener noreferrer" target="_blank">Reference counting</a>(引用计数)</p>
+<a id="more"></a>
+<h2 id="Reference-counting-的实现原理"><a href="#Reference-counting-的实现原理" class="headerlink" title="Reference counting 的实现原理"></a>Reference counting 的实现原理</h2><p>为每个内存对象分配一个计数器，当一个内存对象建立时计数器初始化为 1(因为此时一定有一个变量引用了该对象)。以后每有一个新变量引用此内存对象（如赋值操作 $a = $b），计数器加 1，而每当减少一个引用此内存对象的变量（如 unset($a)），计数器减 1。当垃圾回收机制运作的时候，将所有计数器为 0 的内存对象销毁并回收其占用的内存。</p>
+<p>在PHP5.2中内存对象就是zval, 计数器就是 zval 的 refcount (PHP5.3之后改成 refcount__gc)， 使用 xdebug 拓展的xdebug_debug_zval() 方法可以看到 refcount 值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$a = &apos;hello world&apos;;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br><span class="line">$b = $a;</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br><span class="line">unset($b);</span><br><span class="line">xdebug_debug_zval(&apos;a&apos;);</span><br></pre></td></tr></table></figure>
+<p>输出结果<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=1, is_ref=0)=&apos;hello world&apos;</span><br><span class="line">a: (refcount=2, is_ref=0)=&apos;hello world&apos;</span><br><span class="line">b: (refcount=1, is_ref=0)=&apos;hello world&apos;</span><br></pre></td></tr></table></figure></p>
+<p> 由上而的输出结果到知，当把$a赋值给$b时，refcount 会加 1, 因为两个变量都指向同一个zval, 而不是新增一个zval, 也就是cow(写时复制)。</p>
+<p> 当对$b使用unset()时，refcount 会减 1, 因为现在只有$a指向这个zval。</p>
+<p> Reference counting (引用计数) 非常的简单，但也有一个致命问题，那就是环状引用时会造成内存泄露。</p>
+<p> 如下是一个典型例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = array( &apos;one&apos; );</span><br><span class="line">$a[] = &amp;$a;</span><br><span class="line">xdebug_debug_zval( &apos;a&apos; );</span><br></pre></td></tr></table></figure>
+<p> 输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=2, is_ref=1)=array (</span><br><span class="line">   0 =&gt; (refcount=1, is_ref=0)=&apos;one&apos;,</span><br><span class="line">   1 =&gt; (refcount=2, is_ref=1)=...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p> 图示:<br>![]: <a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png</a></p>
+<p> 上面的 ==…== 是发生了递归调用, a 的变量容器中 refcount 的值由于有两次引用的存在所以为 2。</p>
+<p> 此时对 $a 调用 unset()，将从符号表中删除这个符号，同时 refcount 值也减 1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(refcount=1, is_ref=1)=array (</span><br><span class="line">   0 =&gt; (refcount=1, is_ref=0)=&apos;one&apos;,</span><br><span class="line">   1 =&gt; (refcount=1, is_ref=1)=...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>图示：</p>
+<p>![]:<a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png</a><br>因为 refcount = 1 不等于 0，所以它不会被当作垃圾回收。但同时在符号表中找不到哪个符号指向这个 zval，导致也没有办法手动清除。最终的导致在这个脚本结束之前，这个zval结构体会一直占用着内存，导致内存泄漏。</p>
+<p>由于 Reference Counting 的这个缺陷，PHP5.3 改进了垃圾回收算法。</p>
+<h1 id="PHP5-3中的垃圾回收算法"><a href="#PHP5-3中的垃圾回收算法" class="headerlink" title="PHP5.3中的垃圾回收算法"></a>PHP5.3中的垃圾回收算法</h1><p>PHP5.3 的垃圾回收算法是在引用计数的基础上，添加了一种同步回收算法，这个算法由IBM的工程师在论文<a href="https://researcher.watson.ibm.com/researcher/files/us-bacon/Bacon01Concurrent.pdf" rel="external nofollow noopener noreferrer" target="_blank">Concurrent Cycle Collection in Reference Counted Systems</a> 中提出。</p>
+<p>具体实现原理:</p>
+<p>首先 PHP 会分配一个固定大小的“根缓冲区”，这个缓冲区用于存放固定数量的 zval（默认是10,000），如果需要修改则需要修改源代码 Zend/zend_gc.c 中的常量 GC_ROOT_BUFFER_MAX_ENTRIES 然后重新编译。</p>
+<p>这个根缓冲区中存放的是 ==可能根（possible roots)==，就是可能发生内存泄露的 zval。当根缓冲区满了的时候（或者手动调用 ==gc_collect_cycle()== 函数时），PHP 就会执行垃圾回收。</p>
+<p>![]:<a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png</a></p>
+<h2 id="步骤-A"><a href="#步骤-A" class="headerlink" title="步骤 A"></a>步骤 A</h2><p> 为避免不得不检查所有引用计数可能减少的垃圾周期，这个算法把所有可能根(possible roots 都是zval变量容器),放在根缓冲区(root buffer)中(用紫色来标记，称为疑似垃圾)，这样可以同时确保每个可能的垃圾根(possible garbage root)在缓冲区中只出现一次。仅仅在根缓冲区满了时，才对缓冲区内部所有不同的变量容器执行垃圾回收操作。</p>
+<h2 id="步骤-B"><a href="#步骤-B" class="headerlink" title="步骤 B"></a>步骤 B</h2><p> 模拟删除每个紫色变量。模拟删除时可能将不是紫色的普通变量引用数减”1”，如果某个普通变量引用计数变成0了，就对这个普通变量再做一次模拟删除。每个变量只能被模拟删除一次，模拟删除后标记为灰。</p>
+<h2 id="步骤-C"><a href="#步骤-C" class="headerlink" title="步骤 C"></a>步骤 C</h2><p> 模拟恢复每个紫色变量。恢复是有条件的，当变量的引用计数大于0时才对其做模拟恢复。同样每个变量只能恢复一次，恢复后标记为黑，基本就是步骤 B 的逆运算。这样剩下的一堆没能恢复的就是该删除的蓝色节点了，</p>
+<h2 id="步骤-D"><a href="#步骤-D" class="headerlink" title="步骤 D"></a>步骤 D</h2><p> 清空根缓冲区中的所有根，然后销毁所有 refcount 为 0 的 zval，并收回其内存，这才是真实删除的过程。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>并不是每次 refcount 减少时都进入回收周期，只有根缓冲区满额后在开始垃圾回收。</li>
+<li>解决了循环引用导致的内存泄露问题。</li>
+<li>整体上可以总将内存泄露保持在一个阈值以下（与缓冲区的大小有关)。</li>
+</ul>
+<h1 id="新的垃圾回收机制总结"><a href="#新的垃圾回收机制总结" class="headerlink" title="新的垃圾回收机制总结"></a>新的垃圾回收机制总结</h1><ul>
+<li>如果发现一个zval容器中的refcount在增加，说明不是垃圾</li>
+<li>如果发现一个zval容器中的refcount在减少，如果减到了0，直接当做垃圾回收</li>
+<li>如果发现一个zval容器中的refcount在减少，并没有减到0，PHP会把该值放到缓冲区，当做有可能是垃圾的怀疑对象</li>
+<li>当缓冲区满时，PHP会自动调用一个方法取遍历每一个值，如果发现是垃圾就清理。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+		-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+		</div>
+    
+</div>
 
       
     </div>
 
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP-zend-gc/" rel="tag"><i class="fa fa-tag"></i> PHP zend gc</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/06/深入理解PHP内核之ZVAL/" rel="next" title="深入理解PHP内核之ZVAL">
+                <i class="fa fa-chevron-left"></i> 深入理解PHP内核之ZVAL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -409,6 +619,10 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 
 
           
+
+  
+
+
 
         </div>
         
@@ -429,8 +643,17 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -499,6 +722,22 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP5-2中的垃圾回收算法"><span class="nav-number">2.</span> <span class="nav-text">PHP5.2中的垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-counting-的实现原理"><span class="nav-number">2.1.</span> <span class="nav-text">Reference counting 的实现原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP5-3中的垃圾回收算法"><span class="nav-number">3.</span> <span class="nav-text">PHP5.3中的垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-A"><span class="nav-number">3.1.</span> <span class="nav-text">步骤 A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-B"><span class="nav-number">3.2.</span> <span class="nav-text">步骤 B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-C"><span class="nav-number">3.3.</span> <span class="nav-text">步骤 C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-D"><span class="nav-number">3.4.</span> <span class="nav-text">步骤 D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.4.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的垃圾回收机制总结"><span class="nav-number">4.</span> <span class="nav-text">新的垃圾回收机制总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -666,6 +905,10 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
