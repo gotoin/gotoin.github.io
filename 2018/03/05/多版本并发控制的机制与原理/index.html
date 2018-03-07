@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Goto&#39;s blog">
 <meta property="og:description" content="什么是 MVCC MVCC （Mutli Version Concurreny Control）既 多版本并发控制，也叫 一致性非锁定读，实现原理其它就是使用快照实现写时复制 (Copy On Write)  使用MVCC的好处 消除锁的开销：传统的数据库保证数据一致性是对数据进行加锁操作，但加锁必然会产生开销，使用MVCC能够避免对数据加锁。  提高并发：在保证了数据的ACID的同时，实现了 读">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T03:37:51.000Z">
+<meta property="og:updated_time" content="2018-03-07T07:08:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多版本并发控制的机制与原理">
 <meta name="twitter:description" content="什么是 MVCC MVCC （Mutli Version Concurreny Control）既 多版本并发控制，也叫 一致性非锁定读，实现原理其它就是使用快照实现写时复制 (Copy On Write)  使用MVCC的好处 消除锁的开销：传统的数据库保证数据一致性是对数据进行加锁操作，但加锁必然会产生开销，使用MVCC能够避免对数据加锁。  提高并发：在保证了数据的ACID的同时，实现了 读">
@@ -508,6 +508,7 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 <li><p>提高并发：在保证了数据的ACID的同时，实现了 读读 、读写、写读 的并发。</p>
 </li>
 </ul>
+<a id="more"></a>
 <h1 id="InnoDB如何实现MVCC"><a href="#InnoDB如何实现MVCC" class="headerlink" title="InnoDB如何实现MVCC"></a>InnoDB如何实现MVCC</h1><ul>
 <li>MySql InnoDB MVCC主要是为事务的 可重复读 隔离级别服务的，在此隔离级别下，进程间数据相互隔离。</li>
 <li>为了实现MVCC，InnoDB引擎会对每一行都加上两个隐藏的字段，一个字段用来存储行被更新的时间戳，另一字段存储行被删除的时间戳 （这里的时间戳都是逻辑时间戳）。事务在开始时，InnoDB引擎会给该事务一个递增的版本号（也就是上面说的逻辑时间戳），在该事务中，InnoDB会把每一条语句的版本号和这条语句遇到的行版本进行比对，然后结合不同的隔离级别，来决定是否返回该行。</li>

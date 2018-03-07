@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决解决方案1234567// 进入容器$ vim /etc/pam.d/crondaccount    required   pam_access.soaccount    include    password-auth#session    required">
+<meta name="description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决">
 <meta name="keywords" content="docker crontab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次在Docker容器中crontab不执行的问题">
 <meta property="og:url" content="http://www.i4ww.com/2018/02/17/记一次在Docker容器中crontab不执行的问题/index.html">
 <meta property="og:site_name" content="Goto&#39;s blog">
-<meta property="og:description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决解决方案1234567// 进入容器$ vim /etc/pam.d/crondaccount    required   pam_access.soaccount    include    password-auth#session    required">
+<meta property="og:description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T03:41:44.000Z">
+<meta property="og:updated_time" content="2018-03-07T07:09:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次在Docker容器中crontab不执行的问题">
-<meta name="twitter:description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决解决方案1234567// 进入容器$ vim /etc/pam.d/crondaccount    required   pam_access.soaccount    include    password-auth#session    required">
+<meta name="twitter:description" content="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决">
 
 
 
@@ -499,7 +499,8 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
       
 
       
-        <h3 id="在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"><a href="#在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决" class="headerlink" title="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"></a>在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决</h3><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器</span><br><span class="line">$ vim /etc/pam.d/crond</span><br><span class="line">account    required   pam_access.so</span><br><span class="line">account    include    password-auth</span><br><span class="line">#session    required   pam_loginuid.so  #注释此行</span><br><span class="line">session    include    password-auth</span><br><span class="line">auth       include    password-auth</span><br></pre></td></tr></table></figure>
+        <h3 id="在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"><a href="#在容器中添加-crontab-并没有生效，这是由于-docker-容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决" class="headerlink" title="在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决"></a>在容器中添加 crontab 并没有生效，这是由于 docker 容器被严格要求只允许使用内核的部分能力导致的，按下面解决方案修改后解决</h3><a id="more"></a>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器</span><br><span class="line">$ vim /etc/pam.d/crond</span><br><span class="line">account    required   pam_access.so</span><br><span class="line">account    include    password-auth</span><br><span class="line">#session    required   pam_loginuid.so  #注释此行</span><br><span class="line">session    include    password-auth</span><br><span class="line">auth       include    password-auth</span><br></pre></td></tr></table></figure>
 <h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><ul>
 <li>不要在单一容器中运行超过一个进程</li>
 </ul>
