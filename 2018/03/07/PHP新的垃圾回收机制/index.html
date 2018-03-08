@@ -89,10 +89,14 @@
 <meta property="og:site_name" content="Goto&#39;s blog">
 <meta property="og:description" content="介绍在阅读本篇博文之前，建议先了解一下: PHP内核之ZVALPHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).在PHP官方你可以看到关于GC的介绍: 传送 PHP5.2中的垃圾回收算法 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的Reference counting(引用计数)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T16:17:18.000Z">
+<meta property="og:image" content="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png">
+<meta property="og:image" content="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png">
+<meta property="og:image" content="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png">
+<meta property="og:updated_time" content="2018-03-08T01:18:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP新的垃圾回收机制">
 <meta name="twitter:description" content="介绍在阅读本篇博文之前，建议先了解一下: PHP内核之ZVALPHP是一门托管型语言，所以在写PHP代码时无需手动处理内存的分配和释放，也就是说PHP自身实现了垃圾自动回收(GC).在PHP官方你可以看到关于GC的介绍: 传送 PHP5.2中的垃圾回收算法 在php5.3之前，PHP使用的内存回收算法是大名鼎鼎的Reference counting(引用计数)">
+<meta name="twitter:image" content="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png">
 
 
 
@@ -462,7 +466,7 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,480
+                  1,450
                 </span>
               
 
@@ -478,7 +482,7 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  5
                 </span>
               
             </div>
@@ -513,18 +517,18 @@ octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = array( &apos;one&apos; );</span><br><span class="line">$a[] = &amp;$a;</span><br><span class="line">xdebug_debug_zval( &apos;a&apos; );</span><br></pre></td></tr></table></figure>
 <p> 输出结果:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a: (refcount=2, is_ref=1)=array (</span><br><span class="line">   0 =&gt; (refcount=1, is_ref=0)=&apos;one&apos;,</span><br><span class="line">   1 =&gt; (refcount=2, is_ref=1)=...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p> 图示:<br>![]: <a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png</a></p>
-<p> 上面的 ==…== 是发生了递归调用, a 的变量容器中 refcount 的值由于有两次引用的存在所以为 2。</p>
+<p> 图示:<br> <img src="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-loop-array.png" alt=""></p>
+<p> 上面的 … 是发生了递归调用, a 的变量容器中 refcount 的值由于有两次引用的存在所以为 2。</p>
 <p> 此时对 $a 调用 unset()，将从符号表中删除这个符号，同时 refcount 值也减 1。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(refcount=1, is_ref=1)=array (</span><br><span class="line">   0 =&gt; (refcount=1, is_ref=0)=&apos;one&apos;,</span><br><span class="line">   1 =&gt; (refcount=1, is_ref=1)=...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>图示：</p>
-<p>![]:<a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png</a><br>因为 refcount = 1 不等于 0，所以它不会被当作垃圾回收。但同时在符号表中找不到哪个符号指向这个 zval，导致也没有办法手动清除。最终的导致在这个脚本结束之前，这个zval结构体会一直占用着内存，导致内存泄漏。</p>
+<p><img src="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-leak-array.png" alt=""><br>因为 refcount = 1 不等于 0，所以它不会被当作垃圾回收。但同时在符号表中找不到哪个符号指向这个 zval，导致也没有办法手动清除。最终的导致在这个脚本结束之前，这个zval结构体会一直占用着内存，导致内存泄漏。</p>
 <p>由于 Reference Counting 的这个缺陷，PHP5.3 改进了垃圾回收算法。</p>
 <h1 id="PHP5-3中的垃圾回收算法"><a href="#PHP5-3中的垃圾回收算法" class="headerlink" title="PHP5.3中的垃圾回收算法"></a>PHP5.3中的垃圾回收算法</h1><p>PHP5.3 的垃圾回收算法是在引用计数的基础上，添加了一种同步回收算法，这个算法由IBM的工程师在论文<a href="https://researcher.watson.ibm.com/researcher/files/us-bacon/Bacon01Concurrent.pdf" rel="external nofollow noopener noreferrer" target="_blank">Concurrent Cycle Collection in Reference Counted Systems</a> 中提出。</p>
 <p>具体实现原理:</p>
 <p>首先 PHP 会分配一个固定大小的“根缓冲区”，这个缓冲区用于存放固定数量的 zval（默认是10,000），如果需要修改则需要修改源代码 Zend/zend_gc.c 中的常量 GC_ROOT_BUFFER_MAX_ENTRIES 然后重新编译。</p>
-<p>这个根缓冲区中存放的是 ==可能根（possible roots)==，就是可能发生内存泄露的 zval。当根缓冲区满了的时候（或者手动调用 ==gc_collect_cycle()== 函数时），PHP 就会执行垃圾回收。</p>
-<p>![]:<a href="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png</a></p>
+<p>这个根缓冲区中存放的是 可能根（possible roots)，就是可能发生内存泄露的 zval。当根缓冲区满了的时候（或者手动调用 gc_collect_cycle() 函数时），PHP 就会执行垃圾回收。</p>
+<p><img src="http://php.net/manual/zh/images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png" alt=""></p>
 <h2 id="步骤-A"><a href="#步骤-A" class="headerlink" title="步骤 A"></a>步骤 A</h2><p> 为避免不得不检查所有引用计数可能减少的垃圾周期，这个算法把所有可能根(possible roots 都是zval变量容器),放在根缓冲区(root buffer)中(用紫色来标记，称为疑似垃圾)，这样可以同时确保每个可能的垃圾根(possible garbage root)在缓冲区中只出现一次。仅仅在根缓冲区满了时，才对缓冲区内部所有不同的变量容器执行垃圾回收操作。</p>
 <h2 id="步骤-B"><a href="#步骤-B" class="headerlink" title="步骤 B"></a>步骤 B</h2><p> 模拟删除每个紫色变量。模拟删除时可能将不是紫色的普通变量引用数减”1”，如果某个普通变量引用计数变成0了，就对这个普通变量再做一次模拟删除。每个变量只能被模拟删除一次，模拟删除后标记为灰。</p>
 <h2 id="步骤-C"><a href="#步骤-C" class="headerlink" title="步骤 C"></a>步骤 C</h2><p> 模拟恢复每个紫色变量。恢复是有条件的，当变量的引用计数大于0时才对其做模拟恢复。同样每个变量只能恢复一次，恢复后标记为黑，基本就是步骤 B 的逆运算。这样剩下的一堆没能恢复的就是该删除的蓝色节点了，</p>
