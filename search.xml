@@ -9,7 +9,7 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>zend</tag>
+        <tag>Zend</tag>
         <tag>GC</tag>
       </tags>
   </entry>
@@ -22,8 +22,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>zend</tag>
-        <tag>ZVAL</tag>
+        <tag>Zend</tag>
+        <tag>Zval</tag>
       </tags>
   </entry>
   <entry>
@@ -35,18 +35,35 @@
       </categories>
       <tags>
         <tag>单例模式</tag>
+        <tag>懒汉式</tag>
+        <tag>饿汉式</tag>
+        <tag>登记式</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Node.js异步流程控制]]></title>
-    <url>%2F2018%2F03%2F05%2FNode-js%E5%BC%82%E6%AD%A5%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[说明目前 Js 流程控制技术越来越多，各种思想层出不穷。如： promise，generator，co，async 在百花齐放的今天，作为一个前端 或 Node.js沾边工程师或全栈工程师，我们应该学习些什么？ 写作中，未完待续。。。]]></content>
+    <title><![CDATA[ES6 的 Generator (生成器)]]></title>
+    <url>%2F2018%2F03%2F05%2FES6%E7%9A%84Generator%2F</url>
+    <content type="text"><![CDATA[Generator 是 ES6 标准中引入的一个新的数据类型。 例子先看看具体怎么使用 1234567891011function* demo(i) &#123; yield i++; yield i++; return i++;&#125;var de = demo(1);de.next(); // &#123;value: 1, done: false&#125;de.next(); // &#123;value: 2, done: false&#125;de.next(); // &#123;value: 3, done: true&#125; 从上面代码可以看出: 1. Generator 和 函数 很像。 2. Generator 定义 function* 比 函数 多出一个 * 号。 3. Generator 调用后返回的结果 (迭代器对象) 需要赋值给一个变量 4. Generator 返回的结果可以多次调用。 其实上面的代码就是定义了一个以 demo 命名的 Generator (生成器)。 调用后会返回一个对象，这个对象我们称它为 迭代器。 每次调用这个返回的 迭代器 的 next 方法后，会执行第一条 yield (委托)。 并在这里暂停 (退出并保留上下文，下次进入时继续向下运行)， 然后返回一个对象，这个对象包含 一个 value (yield 后面的运算结果) 和 一个 done (迭代器是否完成) 根据上面的执行结果可以看出，每调用一次 next，都会执行一次 yield。 当遇到 return 时，返回对象的 done 就变成了 true, 此时就退出了 Generator。 next 方法123456789101112function* demo() &#123; let i = yield &apos;one&apos;; return i;&#125;var de = demo();let obj = de.next(); // &#123;value: &quot;one&quot;, done: false&#125;de.next(&quot;test:&quot; + obj.value); // &#123;value: &quot;test:one&quot;, done: true&#125; next 方法是可以传递参数的，这个参数将作为 上次暂停的 yield 的返回值。 yield*yield 我们知道是怎么一回事了，那 yield* 又是什么？ 1234567891011121314151617function* demo() &#123; yield &apos;one&apos;; yield foo(); yield &apos;four&apos;;&#125;function* foo() &#123; yield &apos;two&apos;; yield &apos;three&apos;;&#125;var de = demo();de.next(); // &#123;value: &quot;one&quot;, done: false&#125;de.next(); // &#123;value: foo, done: false&#125;de.next(); // &#123;value: &quot;four&quot;, done: false&#125;de.next(); // &#123;value: undefined, done: true&#125; 调用一个 demo 生成器，执行完第一条 yield ‘one’ 后 第二条 yield foo() 调用另一个生成器。 结果发现 yield foo() 并没有去调用 foo() 生成器 中的 yield ‘two’ 这是因为 yield 只会返回右边运算的值，而 foo() 返回的是一个 迭代器，所以这里的 value 会是 foo 123// foo() 返回一个 迭代器foo(); // foo &#123;&lt;suspended&gt;&#125; 我们改用 yield* 再试试 123456789101112131415161718function* demo() &#123; yield &apos;one&apos;; yield* foo(); yield &apos;four&apos;;&#125;function* foo() &#123; yield &apos;two&apos;; yield &apos;three&apos;;&#125;var de = demo();de.next(); // &#123;value: &quot;one&quot;, done: false&#125;de.next(); // &#123;value: &quot;two&quot;, done: false&#125;de.next(); // &#123;value: &quot;three&quot;, done: false&#125;de.next(); // &#123;value: &quot;four&quot;, done: false&#125;de.next(); // &#123;value: undefined, done: true&#125; 很多人用 Generator 来处理异步编程，但它的本质是其实是协程，下一次我们再具体说明。 关于如何使用 Generator 来处理异步编程，请看我的另一篇文章： js异步流程控制 未完待续…]]></content>
       <categories>
         <category>Js</category>
       </categories>
       <tags>
-        <tag>node</tag>
-        <tag>js</tag>
+        <tag>Node</tag>
+        <tag>Js</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Js异步流程控制]]></title>
+    <url>%2F2018%2F03%2F05%2Fjs%E5%BC%82%E6%AD%A5%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[说明目前 Js 流程控制技术多种多样，而async/await是es7的新标准那像 callback, events, promise，generator，co 又是什么样，为什么更推荐使用async呢？ 回调函数先来看看传统的回调，这也是最简单最容易理解的。 123456789101112131415function sleep(callback) &#123; setTimeout(function() &#123; console.log(&apos;执行到这里了&apos;); callback(&apos;hello world&apos;); &#125;, 1000);&#125;sleep(function(message) &#123; console.log(message);&#125;);// 执行结果：// 执行到这里了// hello world 上面的代码比较容易理解，调用sleep, 把匿名函数作为参数传递出去，当sleep执行完成后调用回调参数 但如果有多层调用就会变成这样： 12345678910111213sleep(function(message) &#123; console.log(message); sleep(function(message) &#123; console.log(message); sleep(function(message) &#123; console.log(message); &#125;); &#125;);&#125;); 这也就是所谓的 “回调地狱（callback hell）”。 很明显，这种写法层级嵌套很深，比较反人类，维护起来相当麻烦，出错了很难以排查， 事件监听任务的执行不取决于代码的顺序，而取决于某个事件是否发生。 下面代码采用 nodejs 的 events 模块，该模块可以实现事件绑定触发 (事件机制其实是一种观察者模式) 12345678910111213141516171819202122232425262728function sleep() &#123; var emitter = new require(&apos;events&apos;)(); emitter.emit(&apos;one&apos;, &apos;回调: 1&apos;); setTimeout(function() &#123; emitter.emit(&apos;two&apos;, &apos;回调: 2&apos;); emitter.emit(&apos;done&apos;, &apos;完成&apos;); &#125;, 1000);&#125;var emit = sleep();emit.on(&apos;one&apos;,function (message) &#123; console.log(message);&#125;);emit.on(&apos;two&apos;,function (message) &#123; console.log(message);&#125;);emit.on(&apos;done&apos;,function (message) &#123; console.log(message);&#125;);// 执行结果：// 回调: 1// 回调: 2// 完成 使用 events 的好处是可以比较方便的添加多个回调，有利于实现模块化 但并没有解决回调嵌套的问题 如果有多层嵌套，需要在emit.on匿名函数里添加，如下： 123456emit.on(&apos;done&apos;, function() &#123; var emit2 = sleep(); emit2.on(&apos;done&apos;,function (message) &#123; console.log(message); &#125;);&#125;); 而且整个程序都要变成事件驱动型，运行流程会变得不清晰。 PromisePromise 对象是 CommonJS 提出的一种规范，目的是为异步编程提供统一接口。 并且 ES6 原生提供了 Promise 对象。 直接上代码: 123456789101112131415161718192021222324var delay = function(ret) &#123; return new Promise(function(resolve, reject) &#123; setTimeout(function() &#123; if (ret) &#123; resolve(&apos;delay 执行完了&apos;); &#125; else &#123; reject(&apos;这是出错信息.&apos;); &#125; &#125;, 1000); &#125;); &#125;;var callback = function(message) &#123; console.log(message);&#125;;var error = function(error) &#123; console.log(error);&#125;;delay(true).then(callback).catch(error); // delay 执行完了delay(false).then(callback).catch(error); // 这是出错信息. 使用 promise 后回调函数变成了链式写法，程序的运行流程可以看得很清楚，而且有一整套的配套方法实现许多强大的功能。 比如： 12345// 实现多个回调delay().then(callback1).then(callback2);// 发生错误时delay().catch(error); 这种写法的缺点是编写和理解比较困难。 Generator Generator(生成器) 是 ES6 的新特性，具体用法请看我的另一篇文章 ES6 的 Generator (生成器) co那么怎么利用 Generator 进行异步流程控制呢？ 先实现一个 co 函数 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950// 先定义一个 sleep 函数，这个函数的作用是返回一个匿名函数function sleep(ms) &#123; return function(callback) &#123; setTimeout(function() &#123; callback(&apos;test&apos;); &#125;, ms); &#125;&#125;// 把一个生成器作为参数传递给 coco(function* ()&#123; var now = Date.now(); var i = yield sleep(100); console.log(Date.now() - now); // 100 (因为执行效率的原因可能会大于100) console.log(i); // test&#125;);function co(func) &#123; // 执行 生成器 得到 迭代器 var gen = func(); //调用下面的 next 方面 next(); function next(arg) &#123; // 执行 迭代器 var ret = gen.next(arg); // 生成器结束直接返回 if (ret.done) &#123; return; &#125; // 执行回调 // 这里的 ret.value 就是上面的 sleep 返回的 匿名函数 if (typeof ret.value == &apos;function&apos;) &#123; ret.value(function() &#123; // 当 异步操作 (这里是上面的setTimeout) 完成后 // 递归调用 next，并携带上参数 next.apply(this, arguments); &#125;); return; &#125; &#125;&#125; 把 Promise、generator 和 co 结合起来 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849function co(gen) &#123; var iterator = gen(); next(); function next(arg) &#123; var ret = iterator.next(arg); if (ret.done) &#123; return; &#125; if (typeof ret.value == &apos;object&apos;) &#123; ret.value.then(next).catch(function(error) &#123; next(iterator.throw(error)); &#125;); &#125; &#125;&#125; var delay = function(ret) &#123; return new Promise(function(resolve, reject) &#123; setTimeout(function() &#123; if (ret) &#123; resolve(&apos;delay 执行完了&apos;); &#125; else &#123; reject(&apos;这是出错信息.&apos;); &#125; &#125;, 1000); &#125;);&#125;;var gen = function* () &#123; try &#123; var one = yield delay(true); console.log(one); var two = yield delay(false); console.log(two); &#125; catch(error) &#123; console.log(&apos;出错了：&apos; + error); &#125;&#125;co(gen)// 执行结果 // delay 执行完了// 出错了：这是出错信息. 上面仅仅是一个简单的 co 实现方式，想体验更加强大的 co，可以去看看下面 TJ 大神开发的 co 模块 co模块 ps: co (coroutine) 即协同程序。 async/awaitasync/await 是es7的新标准，可以说是异步流程控制的终极解决方案，它使用起来非常简单，而且不需要知道底层的运行原理 1234567891011121314151617181920212223242526272829303132333435// 把上面的例子拿过来var gen = function* () &#123; try &#123; var one = yield delay(true); console.log(one); var two = yield delay(false); console.log(two); &#125; catch(error) &#123; console.log(&apos;出错了：&apos; + error); &#125;&#125;co(gen)// 上面的代码，改用 async/await 可以写成这样var test = async function() &#123; try &#123; var one = await delay(true); console.log(one); var two = await delay(false); console.log(two); &#125; catch(error) &#123; console.log(&apos;出错了：&apos; + error); &#125;&#125;test();// 执行结果 // delay 执行完了// 出错了：这是出错信息. 其实经过比较就会发现，async 就是将 Generator 函数的星号（*）换成 async，将 yield 换成 await。 也就是说 async/await 仅仅是 Generator/yield 的一个语法糖罢了。]]></content>
+      <categories>
+        <category>Js</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>Js</tag>
+        <tag>ES7</tag>
       </tags>
   </entry>
   <entry>
